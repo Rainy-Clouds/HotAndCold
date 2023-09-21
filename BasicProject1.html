@@ -1,0 +1,142 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Regular Mode</title>
+		<style></style>
+		<script>
+			function initialize()
+			{
+				currentGuess = 50;
+				guessesLeft = 5;
+				myNumber = Math.floor(Math.random() * 100) + 1;
+				gameWon = false;
+
+				guessText = document.getElementById("guessText");
+				remainText = document.getElementById("remainText");
+				pastGuesses = document.getElementById("pastGuesses");
+
+				update();
+			}
+
+			function update()
+			{
+				if(guessesLeft > 0 && !gameWon)
+				{
+					guessText.innerHTML = "Current Guess: " + currentGuess;
+				}
+				else if(gameWon)
+				{
+					guessText.innerHTML = "YOU WON! The number was " + myNumber + ".";
+				}
+				else
+				{
+					guessText.innerHTML = "GAME OVER! The number was " + myNumber + ".";
+				}
+				remainText.innerHTML = "Guesses Remaining: " + guessesLeft;
+			}
+
+			function addToGuess(add)
+			{
+				if(guessesLeft > 0 && !gameWon)
+				{
+					currentGuess += add;
+
+					if(currentGuess < 0)
+					{
+						currentGuess = 0;
+					}
+					if(currentGuess > 100)
+					{
+						currentGuess = 100;
+					}
+				}
+				update();
+			}
+
+			function commit()
+			{
+				if(guessesLeft > 0 && !gameWon)
+				{
+					numStatus = "";
+					if(currentGuess == myNumber)
+					{
+						numStatus = "You got it!";
+						gameWon = true;
+					}
+					else if(Math.abs(currentGuess - myNumber) <= 5)
+					{
+						numStatus = "Very Hot";
+					}
+					else if(Math.abs(currentGuess - myNumber) <= 8)
+					{
+						numStatus = "Hot";
+					}
+					else if(Math.abs(currentGuess - myNumber) <= 15)
+					{
+						numStatus = "Very Warm";
+					}
+					else if(Math.abs(currentGuess - myNumber) <= 20)
+					{
+						numStatus = "Warm";
+					}
+					else if(Math.abs(currentGuess - myNumber) <= 30)
+					{
+						numStatus = "Cool";
+					}
+					else if(Math.abs(currentGuess - myNumber) <= 40)
+					{
+						numStatus = "Very Cool";
+					}
+					else if(Math.abs(currentGuess - myNumber) <= 55)
+					{
+						numStatus = "Cold";
+					}
+					else
+					{
+						numStatus = "Very Cold"
+					}
+					pastGuesses.innerHTML += currentGuess + " " + numStatus + "<br>";
+
+					if(numStatus != "Very Hot" && !gameWon)
+					{
+						guessesLeft--;
+					}
+				}
+				update();
+			}
+
+			function reset()
+			{
+				initialize();
+				pastGuesses.innerHTML = "";
+			}
+		</script>
+	</head>
+	
+	<body onload="initialize();">
+		<h1 id="guessText">Current Guess: </h1>
+		<h3 id="remainText">Guesses Remaining: </h3>
+		<p id="pastGuesses"></p>
+		<hr />
+		<div>
+			<button onclick="addToGuess(-1);">-1</button>
+			<button onclick="addToGuess(1);">+1</button>
+		</div>
+		<div>
+			<button onclick="addToGuess(-5);">-5</button>
+			<button onclick="addToGuess(5);">+5</button>
+		</div>
+		<div>
+			<button onclick="addToGuess(-10);">-10</button>
+			<button onclick="addToGuess(10);">+10</button>
+		</div>
+		<div>
+			<button onclick="addToGuess(-25);">-25</button>
+			<button onclick="addToGuess(25);">+25</button>
+		</div>
+		<div>
+			<button onclick="commit();">COMMIT!</button>
+			<button onclick="reset();">RESET</button>
+		</div>
+	</body>
+</html>
