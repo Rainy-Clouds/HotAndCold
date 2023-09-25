@@ -1,21 +1,31 @@
 <!DOCTYPE HTML>
 <html>
 	<head>
-		<title>Regular Mode</title>
+		<title>Hot and Cold!</title>
 		<link rel="stylesheet" href="gamestyle.css" />
 		<script>
 			function initialize()
+			{
+				loadGame();
+
+				guessText = document.getElementById("guessText");
+				remainText = document.getElementById("remainText");
+				pastGuesses = document.getElementById("pastGuesses");
+				musicButton = document.getElementById("musicbutton");
+
+				hotncold = new Audio("music.mp3");
+				hotncold.loop = true;
+				hotncold.currentTime = 32;
+
+				update();
+			}
+
+			function loadGame()
 			{
 				currentGuess = 50;
 				guessesLeft = 5;
 				myNumber = Math.floor(Math.random() * 100) + 1;
 				gameWon = false;
-
-				console.log(myNumber);
-
-				guessText = document.getElementById("guessText");
-				remainText = document.getElementById("remainText");
-				pastGuesses = document.getElementById("pastGuesses");
 
 				update();
 			}
@@ -109,13 +119,28 @@
 
 			function reset()
 			{
-				initialize();
+				loadGame();
 				pastGuesses.innerHTML = "";
+			}
+
+			function toggleMusic()
+			{
+				if(hotncold.paused)
+				{
+					hotncold.play();
+					musicButton.innerHTML = "🔊";
+				}
+				else
+				{
+					hotncold.pause();
+					musicButton.innerHTML = "🔈";
+				}
 			}
 		</script>
 	</head>
 	
 	<body onload="initialize();">
+		<button class="music" onclick="toggleMusic();" id="musicbutton">🔈</button>
 		<section class="bg"></section>
 		<section class="gametab center">
 			<div class="leftpanel">
