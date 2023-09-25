@@ -1,0 +1,37 @@
+* 
+{
+    margin: 0;
+}
+
+.title
+{
+    min-height: 50vh;
+    width: 100%;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url("cool.jpg");
+    background-position: center;
+    background-size: cover;
+    position: relative;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;   
+}
+
+.moderow
+{
+    min-height: 50vh;
+    width: 100%;
+    background-size: cover;
+    position: relative;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.mode
+{
+    width: 75%;
+    display: flex;
+}

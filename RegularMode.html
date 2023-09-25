@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<title>Regular Mode</title>
-		<style></style>
+		<link rel="stylesheet" href="gamestyle.css" />
 		<script>
 			function initialize()
 			{
@@ -62,44 +62,44 @@
 					numStatus = "";
 					if(currentGuess == myNumber)
 					{
-						numStatus = "You got it!";
+						numStatus = "You got it! 🏆";
 						gameWon = true;
 					}
 					else if(Math.abs(currentGuess - myNumber) <= 5)
 					{
-						numStatus = "Very Hot";
+						numStatus = "Very Hot 🔥";
 					}
 					else if(Math.abs(currentGuess - myNumber) <= 8)
 					{
-						numStatus = "Hot";
+						numStatus = "Hot 🥵";
 					}
 					else if(Math.abs(currentGuess - myNumber) <= 15)
 					{
-						numStatus = "Very Warm";
+						numStatus = "Very Warm 🌡️";
 					}
 					else if(Math.abs(currentGuess - myNumber) <= 20)
 					{
-						numStatus = "Warm";
+						numStatus = "Warm 😎";
 					}
 					else if(Math.abs(currentGuess - myNumber) <= 30)
 					{
-						numStatus = "Cool";
+						numStatus = "Cool 🍃";
 					}
 					else if(Math.abs(currentGuess - myNumber) <= 40)
 					{
-						numStatus = "Very Cool";
+						numStatus = "Very Cool ⛄";
 					}
 					else if(Math.abs(currentGuess - myNumber) <= 55)
 					{
-						numStatus = "Cold";
+						numStatus = "Cold ❄️";
 					}
 					else
 					{
-						numStatus = "Very Cold"
+						numStatus = "Very Cold 🥶"
 					}
-					pastGuesses.innerHTML += currentGuess + " " + numStatus + "<br>";
+					pastGuesses.innerHTML += currentGuess + " - " + numStatus + "<br>";
 
-					if(numStatus != "Very Hot" && !gameWon)
+					if(numStatus != "Very Hot 🔥" && !gameWon)
 					{
 						guessesLeft--;
 					}
@@ -116,29 +116,44 @@
 	</head>
 	
 	<body onload="initialize();">
-		<h1 id="guessText">Current Guess: </h1>
-		<h3 id="remainText">Guesses Remaining: </h3>
-		<p id="pastGuesses"></p>
-		<hr />
-		<div>
-			<button onclick="addToGuess(-1);">-1</button>
-			<button onclick="addToGuess(1);">+1</button>
-		</div>
-		<div>
-			<button onclick="addToGuess(-5);">-5</button>
-			<button onclick="addToGuess(5);">+5</button>
-		</div>
-		<div>
-			<button onclick="addToGuess(-10);">-10</button>
-			<button onclick="addToGuess(10);">+10</button>
-		</div>
-		<div>
-			<button onclick="addToGuess(-25);">-25</button>
-			<button onclick="addToGuess(25);">+25</button>
-		</div>
-		<div>
-			<button onclick="commit();">COMMIT!</button>
-			<button onclick="reset();">RESET</button>
-		</div>
+		<section class="bg"></section>
+		<section class="gametab center">
+			<div class="leftpanel">
+				<div class="guesstab">
+					<h1 id="guessText">Current Guess: </h1>
+				</div>
+				<div class="guessbelow">
+					<p id="remainText">Guesses Remaining: </p>
+					<div class="numpad">
+						<div class="numpair">
+							<button class="numbutton negative" onclick="addToGuess(-1);">-1</button>
+							<button class="numbutton positive" onclick="addToGuess(1);">+1</button>
+						</div>
+						<div class="numpair">
+							<button class="numbutton negative" onclick="addToGuess(-5);">-5</button>
+							<button class="numbutton positive" onclick="addToGuess(5);">+5</button>
+						</div>
+						<div class="numpair">
+							<button class="numbutton negative" onclick="addToGuess(-10);">-10</button>
+							<button class="numbutton positive" onclick="addToGuess(10);">+10</button>
+						</div>
+						<div class="numpair">
+							<button class="numbutton negative" onclick="addToGuess(-25);">-25</button>
+							<button class="numbutton positive" onclick="addToGuess(25);">+25</button>
+						</div>
+					</div>
+					<div>
+						<div>
+							<button class="regbutton" onclick="commit();">COMMIT</button>
+							<button class="regbutton" onclick="reset();">RESET</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="rightpanel">
+				<h1>Past Guesses</h1>
+				<p id="pastGuesses"></p>
+			</div>
+		</section>
 	</body>
 </html>
